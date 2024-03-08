@@ -144,6 +144,45 @@ return {
         -- But for many setups, the LSP (`tsserver`) will work just fine
         -- tsserver = {},
         --
+        gopls = {
+          settings = {
+            gopls = {
+              analyses = {
+                unusedparams = true,
+              },
+              staticcheck = true,
+              gofumpt = true,
+            },
+          },
+        },
+        dockerls = {},
+        docker_compose_language_service = {},
+        pyright = {
+          settings = {
+            pyright = {
+              disableOrganizeImports = true,
+              analysis = {
+                typeCheckingMode = 'strict',
+              },
+            },
+          },
+        },
+        ruff_lsp = {
+          init_options = {
+            settings = {
+              args = {
+                select = 'ALL',
+              },
+            },
+          },
+        },
+        terraformls = {
+          on_attach = function()
+            require('treesitter-terraform-doc').setup {}
+            vim.keymap.set('n', '<leader>td', ':OpenDoc<CR>', {})
+          end,
+        },
+        yamlls = {},
 
         lua_ls = {
           -- cmd = {...},
@@ -167,7 +206,7 @@ return {
                 callSnippet = 'Replace',
               },
               -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-              -- diagnostics = { disable = { 'missing-fields' } },
+              diagnostics = { disable = { 'missing-fields' } },
             },
           },
         },
