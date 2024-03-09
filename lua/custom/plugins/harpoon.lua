@@ -23,5 +23,15 @@ return {
     vim.keymap.set('n', '<leader>hn', function()
       harpoon:list():next()
     end)
+
+    -- Document key chains
+    require('which-key').register {
+      ['<leader>ha'] = { name = '[A]dd to list', _ = 'which_key_ignore' },
+      ['<leader>hd'] = { name = '[D]elete from list', _ = 'which_key_ignore' },
+      ['<leader>hc'] = { name = '[C]lear list', _ = 'which_key_ignore' },
+      ['<leader>hh'] = { name = '[H]arpoon UI', _ = 'which_key_ignore' },
+      ['<leader>hp'] = { name = '[P]revious', _ = 'which_key_ignore' },
+      ['<leader>hn'] = { name = '[N]ext', _ = 'which_key_ignore' },
+    }
   end,
 }
