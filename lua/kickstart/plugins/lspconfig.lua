@@ -112,6 +112,17 @@ return {
               callback = vim.lsp.buf.clear_references,
             })
           end
+
+          vim.api.nvim_create_autocmd('BufWritePre', {
+            buffer = event.buf,
+            callback = function()
+              vim.lsp.buf.code_action {
+                context = { only = { 'source.organizeImports' } },
+                apply = true,
+              }
+              vim.wait(100)
+            end,
+          })
         end,
       })
 
@@ -225,6 +236,8 @@ return {
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format lua code
+        'ruff',
+        'taplo',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
