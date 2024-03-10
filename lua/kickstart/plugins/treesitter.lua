@@ -13,6 +13,7 @@ return {
           'dockerfile',
           'hcl',
           'html',
+          'json',
           'lua',
           'markdown',
           'python',
