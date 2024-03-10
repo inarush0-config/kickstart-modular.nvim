@@ -143,18 +143,13 @@ return {
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
-        -- clangd = {},
-        -- gopls = {},
-        -- pyright = {},
-        -- rust_analyzer = {},
-        -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
-        --
-        -- Some languages (like typescript) have entire language plugins that can be useful:
-        --    https://github.com/pmizio/typescript-tools.nvim
-        --
-        -- But for many setups, the LSP (`tsserver`) will work just fine
-        -- tsserver = {},
-        --
+        dockerls = {},
+        golangci_lint_ls = {
+          filetypes = { 'go', 'gomod', 'gotmpl' },
+          init_options = {
+            command = { 'golangci-lint', 'run', '--enable-all', '--out-format', 'json', '--issues-exit-code=1' },
+          },
+        },
         gopls = {
           settings = {
             gopls = {
@@ -166,7 +161,6 @@ return {
             },
           },
         },
-        dockerls = {},
         docker_compose_language_service = {},
         pyright = {
           settings = {
@@ -235,8 +229,11 @@ return {
       -- for you, so that they are available from within Neovim.
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
-        'stylua', -- Used to format lua code
+        'golangci-lint',
+        'golangci-lint-langserver',
+        'gopls',
         'ruff',
+        'stylua',
         'taplo',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
