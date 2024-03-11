@@ -128,9 +128,6 @@ return {
         },
         golangci_lint_ls = {
           filetypes = { 'go', 'gomod', 'gotmpl' },
-          init_options = {
-            command = { 'golangci-lint', 'run', '--enable-all', '--out-format', 'json' },
-          },
         },
         docker_compose_language_service = {},
         pyright = {
