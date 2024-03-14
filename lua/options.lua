@@ -24,5 +24,6 @@ vim.opt.termguicolors = true
 vim.opt.timeoutlen = 300
 vim.opt.undofile = true
 vim.opt.updatetime = 250
+vim.opt.colorcolumn = "80"
 
 -- vim: ts=2 sts=2 sw=2 et

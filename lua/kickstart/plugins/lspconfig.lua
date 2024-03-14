@@ -201,6 +201,7 @@ return {
       vim.list_extend(ensure_installed, {
         'golangci-lint',
         'gopls',
+        'mdformat',
         'ruff',
         'stylua',
         'taplo',
