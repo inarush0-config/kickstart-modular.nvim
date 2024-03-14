@@ -131,6 +131,7 @@ return {
           filetypes = { 'go', 'gomod', 'gotmpl' },
         },
         docker_compose_language_service = {},
+        marksman = {},
         pyright = {
           settings = {
             pyright = {
