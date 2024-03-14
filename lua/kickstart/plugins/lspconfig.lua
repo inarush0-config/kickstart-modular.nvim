@@ -202,6 +202,7 @@ return {
         'golangci-lint',
         'gopls',
         'mdformat',
+        'prettier',
         'ruff',
         'stylua',
         'taplo',

@@ -12,6 +12,7 @@ return {
         -- Conform can also run multiple formatters sequentially
         python = { 'ruff_format' },
         toml = { 'taplo' },
+        markdown = { 'prettier' },
         --
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
