@@ -62,6 +62,8 @@ return {
             'node_modules/',
             '.venv/',
             '.terraform/',
+            '.pyc',
+            '.pytest_cache/',
           },
         },
         pickers = {
