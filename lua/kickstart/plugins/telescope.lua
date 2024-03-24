@@ -94,6 +94,7 @@ return {
       whichkey.register({
         s = {
           name = '[S]earch',
+          b = { builtin.buffers, '[ ] Find existing buffers' },
           d = { builtin.diagnostics, '[S]earch [D]iagnostics' },
           f = { builtin.find_files, '[S]earch [F]iles' },
           g = { builtin.live_grep, '[S]earch by [G]rep' },
@@ -102,7 +103,7 @@ return {
           r = { builtin.resume, '[S]earch [R]esume' },
           s = { builtin.builtin, '[S]earch [S]elect Telescope' },
           w = { builtin.grep_string, '[S]earch current [W]ord' },
-          z = { telescope.extensions.chezmoi.find_files, '[C]he[Z]moi' },
+          z = { telescope.extensions.chezmoi.find_files, 'Che[Z]moi' },
           n = {
             function()
               builtin.find_files { cwd = vim.fn.stdpath 'config' }
@@ -110,7 +111,6 @@ return {
             '[S]earch [N]eovim files',
           },
           ['.'] = { builtin.oldfiles, '[S]earch Recent Files ("." for repeat)' },
-          ['leader'] = { builtin.buffers, '[ ] Find existing buffers' },
           ['/'] = {
             function()
               builtin.live_grep {
