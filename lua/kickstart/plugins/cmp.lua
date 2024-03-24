@@ -89,19 +89,19 @@ return {
         sources = {
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
-          -- { name = 'nvim_lsp_signature_help' },
+          { name = 'nvim_lsp_signature_help' },
           { name = 'nvim_lua' },
           { name = 'path' },
         },
-        sorting = {
-          comparators = {
-            cmp.config.compare.locality,
-            cmp.config.compare.recently_used,
-            cmp.config.compare.score,
-            cmp.config.compare.offset,
-            cmp.config.compare.order,
-          },
-        },
+        -- sorting = {
+        --   comparators = {
+        --     cmp.config.compare.score,
+        --     cmp.config.compare.locality,
+        --     cmp.config.compare.recently_used,
+        --     cmp.config.compare.offset,
+        --     cmp.config.compare.order,
+        --   },
+        -- },
       }
     end,
   },
