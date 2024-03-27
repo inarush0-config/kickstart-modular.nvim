@@ -11,7 +11,6 @@ vim.opt.inccommand = 'split'
 vim.opt.list = true
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 vim.opt.mouse = 'a'
-vim.opt.nowrap = true
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.scrolloff = 999
@@ -28,5 +27,6 @@ vim.opt.termguicolors = true
 vim.opt.timeoutlen = 300
 vim.opt.undofile = true
 vim.opt.updatetime = 250
+vim.wo.wrap = true
 
 -- vim: ts=2 sts=2 sw=2 et
