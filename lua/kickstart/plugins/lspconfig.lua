@@ -142,7 +142,7 @@ return {
           init_options = {
             settings = {
               args = {
-                select = 'ALL',
+                '--select=ALL',
               },
             },
           },
