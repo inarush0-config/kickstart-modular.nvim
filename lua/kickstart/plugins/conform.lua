@@ -13,6 +13,7 @@ return {
         python = { 'ruff_format' },
         toml = { 'taplo' },
         markdown = { 'prettier' },
+        typescript = { 'prettier' },
         --
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
