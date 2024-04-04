@@ -99,6 +99,7 @@ return {
       --  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+      capabilities.textDocument.completion.completionItem.snippetSupport = true
 
       -- Enable the following language servers
       --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
@@ -112,6 +113,15 @@ return {
       local servers = {
         cypher_ls = {},
         dockerls = {},
+        bashls = {},
+        jsonls = {
+          settings = {
+            json = {
+              schemas = require('schemastore').json.schemas(),
+              validate = { enable = true },
+            },
+          },
+        },
         gopls = {
           settings = {
             gopls = {
@@ -153,7 +163,17 @@ return {
             vim.keymap.set('n', '<leader>td', ':OpenDoc<CR>', {})
           end,
         },
-        yamlls = {},
+        yamlls = {
+          settings = {
+            yaml = {
+              schemaStore = {
+                enable = false,
+                url = '',
+              },
+              schemas = require('schemastore').yaml.schemas(),
+            },
+          },
+        },
 
         lua_ls = {
           -- cmd = {...},
