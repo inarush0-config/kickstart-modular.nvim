@@ -47,7 +47,7 @@ return {
     }
 
     -- Basic debugging keymaps, feel free to change to your liking!
-    vim.keymap.set('n', '<F5>', dap.continue, { desc = 'Debug: Start/Continue' })
+    vim.keymap.set('n', '<F1>', dap.continue, { desc = 'Debug: Start/Continue' })
     vim.keymap.set('n', '<F2>', dap.step_into, { desc = 'Debug: Step Into' })
     vim.keymap.set('n', '<F3>', dap.step_over, { desc = 'Debug: Step Over' })
     vim.keymap.set('n', '<F4>', dap.step_out, { desc = 'Debug: Step Out' })
@@ -79,7 +79,7 @@ return {
     }
 
     -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
-    vim.keymap.set('n', '<F6>', dapui.toggle, { desc = 'Debug: See last session result.' })
+    vim.keymap.set('n', '<F5>', dapui.toggle, { desc = 'Debug: See last session result.' })
 
     dap.listeners.after.event_initialized['dapui_config'] = dapui.open
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
@@ -91,21 +91,5 @@ return {
     -- python
     require('dap-python').setup()
     require('dap-python').test_runner = 'pytest'
-    dap.configurations.python = {
-      {
-        name = 'Pytest: Current File',
-        type = 'python',
-        request = 'launch',
-        module = 'pytest',
-        args = {
-          '${file}',
-          '-sv',
-          -- "--log-cli-level=INFO",
-          -- "--log-file=test_out.log"
-        },
-        console = 'integratedTerminal',
-      },
-    }
-    -- require('dap-python').setup()
   end,
 }
