@@ -219,7 +219,6 @@ return {
         'gopls',
         'mdformat',
         'prettier',
-        'ruff',
         'stylua',
         'taplo',
       })
