@@ -20,13 +20,14 @@ return {
         require('which-key').register({
           t = {
             name = '[T]oggle',
-            b = { gs.toggle_current_line_blame, '[T]oggle [B]lame' },
-            f = {
+            b = {
               function()
                 gs.blame_line { full = true }
               end,
-              '[T]oggle [F]ull Blame',
+              'Toggle [F]ull Blame',
             },
+            d = { gs.diffthis, 'Toggle Git [D]iff' },
+            p = { gs.preview_hunk, 'Toggle Hunk [P]review' },
           },
         }, { prefix = '<leader>' }),
       }
