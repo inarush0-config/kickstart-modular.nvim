@@ -25,7 +25,6 @@ return {
     },
     config = function()
       -- See `:help cmp`
-      local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
       local cmp = require 'cmp'
       local luasnip = require 'luasnip'
       luasnip.config.setup {}
@@ -61,6 +60,17 @@ return {
 
       local label_comparator = function(entry1, entry2)
         return entry1.completion_item.label < entry2.completion_item.label
+      end
+
+      local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
+      local python_handler = cmp_autopairs.filetypes['python']['('].handler
+      cmp_autopairs.filetypes['python']['('].handler = function(char, item, bufnr, rules, commit_character)
+        local utils = require 'nvim-autopairs.utils'
+        local line = utils.text_get_current_line(bufnr)
+        if line:match '^(from.*import.*)$' then
+          return
+        end
+        python_handler(char, item, bufnr, rules, commit_character)
       end
 
       cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
@@ -119,11 +129,12 @@ return {
         },
         sorting = {
           comparators = {
-            require('cmp-under-comparator').under,
             cmp.config.compare.scope,
+            require('cmp-under-comparator').under,
             lspkind_comparator {
               kind_priority = {
                 Parameter = 14,
+                Method = 13,
                 Variable = 12,
                 Field = 11,
                 Property = 11,
@@ -132,7 +143,6 @@ return {
                 EnumMember = 10,
                 Event = 10,
                 Function = 10,
-                Method = 10,
                 Operator = 10,
                 Reference = 10,
                 Struct = 10,
