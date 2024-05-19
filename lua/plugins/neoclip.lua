@@ -8,10 +8,6 @@ return {
     require('neoclip').setup()
     local telescope = require 'telescope'
     telescope.load_extension 'neoclip'
-    require('which-key').register({
-      s = {
-        y = { telescope.extensions.neoclip.default, '[S]earch [Y]ankRegisters' },
-      },
-    }, { prefix = '<leader>' })
+    vim.keymap.set('n', '<leader>sy', telescope.extensions.neoclip.default, { desc = 'Search YankRegisters' })
   end,
 }
