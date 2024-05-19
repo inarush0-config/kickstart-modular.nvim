@@ -1,11 +1,7 @@
--- [[ Setting options ]]
--- See `:help vim.opt`
--- NOTE: You can change these options as you wish!
---  For more options, you can see `:help option-list`
-
 vim.opt.breakindent = true
 vim.opt.colorcolumn = '80'
 vim.opt.cursorline = true
+vim.opt.hlsearch = true
 vim.opt.ignorecase = true
 vim.opt.inccommand = 'split'
 vim.opt.list = true
@@ -30,4 +26,10 @@ vim.opt.undofile = true
 vim.opt.updatetime = 250
 vim.wo.wrap = false
 
--- vim: ts=2 sts=2 sw=2 et
+vim.api.nvim_create_autocmd('TextYankPost', {
+  desc = 'Highlight when yanking text',
+  group = vim.api.nvim_create_augroup('highlight-yank', { clear = true }),
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+})
