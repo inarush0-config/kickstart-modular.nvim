@@ -8,9 +8,10 @@ return {
         lsp_fallback = true,
       },
       formatters_by_ft = {
+        json = { 'prettier' },
         lua = { 'stylua' },
-        toml = { 'taplo' },
         markdown = { 'prettier' },
+        toml = { 'taplo' },
         typescript = { 'prettier' },
       },
     },
