@@ -54,6 +54,7 @@ return {
     capabilities.textDocument.completion.completionItem.snippetSupport = true
 
     local servers = {
+      csharp_ls = {},
       cypher_ls = {},
       dockerls = {},
       bashls = {},
