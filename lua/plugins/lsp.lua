@@ -147,6 +147,7 @@ return {
       'prettier',
       'stylua',
       'taplo',
+      'golangci-lint',
     })
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
