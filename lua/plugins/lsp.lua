@@ -163,7 +163,12 @@ return {
       },
     }
 
-    require('mason').setup()
+    require('mason').setup {
+      providers = {
+        'mason.providers.client',
+        'mason.providers.registry-api',
+      },
+    }
 
     local ensure_installed = vim.tbl_keys(servers or {})
     vim.list_extend(ensure_installed, {
