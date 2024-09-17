@@ -26,6 +26,12 @@ vim.opt.undofile = true
 vim.opt.updatetime = 250
 vim.wo.wrap = false
 
+vim.filetype.add {
+  extension = {
+    tf = 'terraform',
+  },
+}
+
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking text',
   group = vim.api.nvim_create_augroup('highlight-yank', { clear = true }),
