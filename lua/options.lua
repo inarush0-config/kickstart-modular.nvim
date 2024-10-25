@@ -1,6 +1,7 @@
 vim.opt.breakindent = true
 vim.opt.colorcolumn = '80'
 vim.opt.cursorline = true
+vim.opt.expandtab = true
 vim.opt.hlsearch = true
 vim.opt.ignorecase = true
 vim.opt.inccommand = 'split'
