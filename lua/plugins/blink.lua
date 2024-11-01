@@ -12,13 +12,7 @@ return {
   -- build = 'RUSTFLAGS="-C target-feature=-crt-static" cargo build --release',
 
   opts = {
-    keymap = {
-      accept = '<C-y>',
-      select_prev = '<C-p>',
-      select_next = '<C-n>',
-      snippet_forward = '<Tab>',
-      snippet_backward = '<S-Tab>',
-    },
+    keymap = 'default',
     highlight = {
       -- sets the fallback highlight groups to nvim-cmp's highlight groups
       -- useful for when your theme doesn't support blink.cmp
