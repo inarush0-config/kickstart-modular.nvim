@@ -79,6 +79,7 @@ return {
       golangci_lint_ls = {
         filetypes = { 'go', 'gomod', 'gotmpl' },
       },
+      templ = {},
       docker_compose_language_service = {},
       marksman = {},
       phpactor = {},
