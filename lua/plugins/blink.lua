@@ -5,7 +5,7 @@ return {
   dependencies = 'rafamadriz/friendly-snippets',
 
   -- use a release tag to download pre-built binaries
-  version = 'v0.*',
+  version = '*',
   -- OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
   -- build = 'cargo build --release',
   -- If you use nix, you can build from source using latest nightly rust with:
@@ -32,16 +32,8 @@ return {
     -- default list of enabled providers defined so that you can extend it
     -- elsewhere in your config, without redefining it, via `opts_extend`
     sources = {
-      completion = {
-        enabled_providers = { 'lsp', 'path', 'snippets', 'buffer' },
-      },
+      default = { 'lsp', 'path', 'snippets', 'buffer' },
     },
-
-    -- experimental auto-brackets support
-    -- completion = { accept = { auto_brackets = { enabled = true } } }
-
-    -- experimental signature help support
-    -- signature = { enabled = true }
   },
   -- allows extending the enabled_providers array elsewhere in your config
   -- without having to redefine it
