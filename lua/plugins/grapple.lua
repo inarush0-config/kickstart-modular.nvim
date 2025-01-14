@@ -1,10 +1,11 @@
+-- Grapple: Bookmark and navigate frequently accessed files
 return {
   'cbochs/grapple.nvim',
   opts = {
     scope = 'git', -- also try out "git_branch"
   },
-  event = { 'BufReadPost', 'BufNewFile' },
-  cmd = 'Grapple',
+  event = { 'BufReadPost', 'BufNewFile' }, -- Lazy-load on file read or creation
+  cmd = 'Grapple', -- Ensure the Grapple command triggers plugin loading
   keys = {
     { '<leader>m', '<cmd>Grapple toggle<cr>', desc = 'Grapple toggle tag' },
     { '<leader>k', '<cmd>Grapple toggle_tags<cr>', desc = 'Grapple toggle tags' },
@@ -16,4 +17,14 @@ return {
     { '<leader>3', '<cmd>Grapple select index=3<cr>', desc = 'Grapple select 3' },
     { '<leader>4', '<cmd>Grapple select index=4<cr>', desc = 'Grapple select 4' },
   },
+  config = function(_, opts)
+    local ok, grapple = pcall(require, 'grapple')
+    if not ok then
+      vim.notify('Failed to load grapple.nvim', vim.log.levels.ERROR)
+      return
+    end
+
+    -- Setup grapple with provided options
+    grapple.setup(opts)
+  end,
 }

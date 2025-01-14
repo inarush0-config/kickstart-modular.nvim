@@ -1,14 +1,80 @@
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
+
+-- Install lazy.nvim if not installed
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
-  vim.fn.system {
+  vim.notify('Installing lazy.nvim...', vim.log.levels.INFO)
+  local result = vim.fn.system {
     'git',
     'clone',
     '--filter=blob:none',
     'https://github.com/folke/lazy.nvim.git',
-    '--branch=stable', -- latest stable release
+    '--branch=stable',
     lazypath,
   }
+
+  if vim.api.nvim_get_vvar 'shell_error' ~= 0 then
+    vim.api.nvim_err_writeln('Failed to install lazy.nvim:\n\n' .. result)
+    return
+  end
+  vim.notify('lazy.nvim installed successfully!', vim.log.levels.INFO)
 end
+
 vim.opt.rtp:prepend(lazypath)
 
-require('lazy').setup 'plugins'
+-- Setup lazy.nvim
+require('lazy').setup {
+  spec = {
+    { import = 'plugins' },
+  },
+  defaults = {
+    lazy = true,
+    version = '*',
+  },
+  install = {
+    colorscheme = { 'gruvbox' },
+  },
+  checker = {
+    enabled = true,
+    notify = false,
+  },
+  change_detection = {
+    notify = false,
+  },
+  performance = {
+    cache = {
+      enabled = true,
+    },
+    reset_packpath = true,
+    rtp = {
+      reset = true,
+      disabled_plugins = {
+        'gzip',
+        'matchit',
+        'matchparen',
+        'netrwPlugin',
+        'tarPlugin',
+        'tohtml',
+        'tutor',
+        'zipPlugin',
+      },
+    },
+  },
+  ui = {
+    border = 'rounded',
+    icons = {
+      cmd = '⌘',
+      config = '🛠',
+      event = '📅',
+      ft = '📂',
+      init = '⚙',
+      keys = '🔑',
+      plugin = '🔌',
+      runtime = '💻',
+      require = '🌙',
+      source = '📄',
+      start = '🚀',
+      task = '📌',
+      lazy = '💤 ',
+    },
+  },
+}

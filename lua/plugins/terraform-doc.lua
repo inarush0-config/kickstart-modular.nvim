@@ -1,1 +1,1 @@
-return { 'Afourcat/treesitter-terraform-doc.nvim' }
+return { 'Afourcat/treesitter-terraform-doc.nvim', commit = 'main' }
