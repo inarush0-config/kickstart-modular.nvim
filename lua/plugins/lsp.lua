@@ -61,8 +61,6 @@ return {
       terraformls = {
         filetypes = { 'terraform', 'terraform-vars', 'hcl' },
         on_attach = function()
-          require('treesitter-terraform-doc').setup {}
-          vim.keymap.set('n', '<leader>td', ':OpenDoc<CR>', {})
           vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
             pattern = { '*.tf', '*.tfvars', '*.hcl' },
             callback = function()
