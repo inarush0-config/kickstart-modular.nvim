@@ -1,6 +1,6 @@
 return {
   'ellisonleao/gruvbox.nvim',
-  lazy = false,
+  event = 'VimEnter',
   priority = 1000,
   config = function()
     vim.o.background = 'dark'

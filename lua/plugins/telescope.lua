@@ -19,7 +19,6 @@ return {
       desc = 'Search neovim config',
     },
   },
-  event = 'VimEnter',
   branch = '0.1.x',
   dependencies = {
     'nvim-lua/plenary.nvim',
