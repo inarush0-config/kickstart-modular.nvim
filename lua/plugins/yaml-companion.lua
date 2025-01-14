@@ -1,5 +1,9 @@
 return {
   'someone-stole-my-name/yaml-companion.nvim',
+  ft = { 'yaml' }, -- Only load for yaml files
+  keys = {
+    { '<leader>ym', desc = 'YAML Schema Selection' },
+  },
   requires = {
     { 'neovim/nvim-lspconfig' },
     { 'nvim-lua/plenary.nvim' },

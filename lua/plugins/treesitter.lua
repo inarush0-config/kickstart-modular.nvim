@@ -1,6 +1,7 @@
 return {
   {
     'nvim-treesitter/nvim-treesitter',
+    event = { 'BufReadPost', 'BufNewFile' },
     build = ':TSUpdate',
     config = function()
       ---@diagnostic disable-next-line: missing-fields
@@ -29,6 +30,7 @@ return {
   },
   {
     'nvim-treesitter/nvim-treesitter-context',
+    event = { 'BufReadPost', 'BufNewFile' },
     config = function()
       require('treesitter-context').setup()
       vim.api.nvim_set_hl(0, 'TreesitterContext', { fg = 'fg', bg = 'bg' })

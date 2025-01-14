@@ -1,5 +1,10 @@
 return {
   'ThePrimeagen/refactoring.nvim',
+  keys = {
+    { '<leader>re', mode = 'x', desc = 'Refactor extract' },
+    { '<leader>rv', mode = 'x', desc = 'Refactor extract var' },
+    { '<leader>rb', mode = 'n', desc = 'Refactor extract block' },
+  },
   dependencies = {
     'nvim-lua/plenary.nvim',
     'nvim-treesitter/nvim-treesitter',

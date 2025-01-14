@@ -1,5 +1,18 @@
 return {
   'nvim-telescope/telescope.nvim',
+  cmd = 'Telescope',
+  keys = {
+    { '<leader>sb', desc = 'Find in existing buffers' },
+    { '<leader>sd', desc = 'Search diagnostics' },
+    { '<leader>sf', desc = 'Search files' },
+    { '<leader>sg', desc = 'Search by grep' },
+    { '<leader>sh', desc = 'Search help' },
+    { '<leader>sk', desc = 'Search keymaps' },
+    { '<leader>ss', desc = 'Select search' },
+    { '<leader>sw', desc = 'Search current word' },
+    { '<leader>sz', desc = 'Search chezmoi files' },
+    { '<leader>sn', desc = 'Search neovim config' },
+  },
   event = 'VimEnter',
   branch = '0.1.x',
   dependencies = {
