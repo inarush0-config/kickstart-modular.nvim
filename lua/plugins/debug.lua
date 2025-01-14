@@ -1,14 +1,5 @@
 return {
   'mfussenegger/nvim-dap',
-  keys = {
-    { '<F1>', desc = 'Debug: Start/Continue' },
-    { '<F2>', desc = 'Debug: Step Into' },
-    { '<F3>', desc = 'Debug: Step Over' },
-    { '<F4>', desc = 'Debug: Step Out' },
-    { '<leader>b', desc = 'Debug: Toggle Breakpoint' },
-    { '<leader>B', desc = 'Debug: Set Breakpoint' },
-    { '<F5>', desc = 'Debug: See last session result.' },
-  },
   dependencies = {
     'rcarriga/nvim-dap-ui',
     'nvim-neotest/nvim-nio',

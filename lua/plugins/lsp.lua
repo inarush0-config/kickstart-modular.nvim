@@ -1,106 +1,61 @@
+-- LSP Configuration and Management
 return {
   'neovim/nvim-lspconfig',
   event = { 'BufReadPre', 'BufNewFile' },
   dependencies = {
     'saghen/blink.cmp',
-    'williamboman/mason.nvim',
-    'williamboman/mason-lspconfig.nvim',
-    'WhoIsSethDaniel/mason-tool-installer.nvim',
-    { 'j-hui/fidget.nvim', opts = {} },
+    { 'williamboman/mason.nvim', config = true },
+    { 'williamboman/mason-lspconfig.nvim', config = true },
+    { 'WhoIsSethDaniel/mason-tool-installer.nvim' },
+    { 'j-hui/fidget.nvim', event = 'LspAttach', opts = {} },
+    { 'folke/neodev.nvim', opts = {} },
+    { 'b0o/schemastore.nvim' },
   },
-  config = function()
-    vim.api.nvim_create_autocmd('LspAttach', {
-      group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
-      callback = function(event)
-        local map = function(keys, func, desc)
-          vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
-        end
-        map('gd', require('telescope.builtin').lsp_definitions, 'Go to definition')
-        map('gr', require('telescope.builtin').lsp_references, 'Go to references')
-        map('gI', require('telescope.builtin').lsp_implementations, 'Go to implementation')
-        map('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type definition')
-        map('<leader>ds', require('telescope.builtin').lsp_document_symbols, 'Document symbols')
-        map('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Workspace symbols')
-        map('<leader>ca', vim.lsp.buf.code_action, 'Code action')
-        map('K', vim.lsp.buf.hover, 'Hover Documentation')
-        map('gD', vim.lsp.buf.declaration, 'Go to declaration')
-
-        local client = vim.lsp.get_client_by_id(event.data.client_id)
-        if client and client.server_capabilities.documentHighlightProvider then
-          vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-            buffer = event.buf,
-            callback = vim.lsp.buf.document_highlight,
-          })
-
-          vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
-            buffer = event.buf,
-            callback = vim.lsp.buf.clear_references,
-          })
-        end
-
-        vim.api.nvim_create_autocmd('BufWritePre', {
-          buffer = event.buf,
-          callback = function()
-            vim.lsp.buf.code_action {
-              context = { only = { 'source.organizeImports' } },
-              apply = true,
-            }
-            vim.wait(100)
-          end,
-        })
-      end,
-    })
-
-    -- local capabilities = vim.lsp.protocol.make_client_capabilities()
-    -- capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities()) capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-    local servers = {
-      cypher_ls = {},
-      dockerls = {},
-      bashls = {},
+  opts = {
+    servers = {
+      cypher_ls = { filetypes = { 'cypher' } },
+      dockerls = { filetypes = { 'dockerfile' } },
+      bashls = { filetypes = { 'sh', 'bash' } },
       jsonls = {
-        settings = {
-          json = {
-            schemas = require('schemastore').json.schemas(),
-            validate = { enable = true },
-          },
-        },
+        filetypes = { 'json', 'jsonc' },
+        settings = function()
+          local ok, schemastore = pcall(require, 'schemastore')
+          return {
+            json = {
+              schemas = ok and schemastore.json.schemas() or {},
+              validate = { enable = true },
+            },
+          }
+        end,
       },
       gopls = {
+        filetypes = { 'go', 'gomod', 'gowork', 'gotmpl' },
         settings = {
           gopls = {
-            analyses = {
-              unusedparams = true,
-            },
+            analyses = { unusedparams = true },
             staticcheck = true,
             gofumpt = true,
           },
         },
       },
-      golangci_lint_ls = {
-        filetypes = { 'go', 'gomod', 'gotmpl' },
-      },
-      templ = {},
+      golangci_lint_ls = { filetypes = { 'go', 'gomod', 'gotmpl' } },
+      templ = { filetypes = { 'templ' } },
       docker_compose_language_service = {},
-      marksman = {},
-      phpactor = {},
+      marksman = { filetypes = { 'markdown', 'markdown.mdx' } },
+      phpactor = { filetypes = { 'php' } },
       pyright = {
+        filetypes = { 'python' },
         settings = {
           pyright = {
             disableOrganizeImports = true,
-            analysis = {
-              typeCheckingMode = 'strict',
-            },
+            analysis = { typeCheckingMode = 'strict' },
           },
         },
       },
       ruff = {
+        filetypes = { 'python' },
         init_options = {
-          settings = {
-            args = {
-              '--select=ALL',
-            },
-          },
+          settings = { args = { '--select=ALL' } },
         },
       },
       terraformls = {
@@ -117,42 +72,42 @@ return {
         end,
       },
       yamlls = {
-        settings = {
-          yaml = {
-            format = {
-              enable = true,
+        filetypes = { 'yaml', 'yaml.docker-compose' },
+        settings = function()
+          local ok, schemastore = pcall(require, 'schemastore')
+          return {
+            yaml = {
+              format = { enable = true },
+              hover = true,
+              completion = true,
+              schemaStore = { enable = false, url = '' },
+              schemas = ok and schemastore.yaml.schemas() or {},
+              customTags = {
+                '!fn',
+                '!And',
+                '!If',
+                '!Not',
+                '!Equals',
+                '!Or',
+                '!FindInMap sequence',
+                '!Base64',
+                '!Cidr',
+                '!Ref',
+                '!Ref Scalar',
+                '!Sub',
+                '!GetAtt',
+                '!GetAZs',
+                '!ImportValue',
+                '!Select',
+                '!Split',
+                '!Join sequence',
+              },
             },
-            hovor = true,
-            completion = true,
-            schemaStore = {
-              enable = false,
-              url = '',
-            },
-            schemas = require('schemastore').yaml.schemas(),
-            customTags = {
-              '!fn',
-              '!And',
-              '!If',
-              '!Not',
-              '!Equals',
-              '!Or',
-              '!FindInMap sequence',
-              '!Base64',
-              '!Cidr',
-              '!Ref',
-              '!Ref Scalar',
-              '!Sub',
-              '!GetAtt',
-              '!GetAZs',
-              '!ImportValue',
-              '!Select',
-              '!Split',
-              '!Join sequence',
-            },
-          },
-        },
+          }
+        end,
       },
       lua_ls = {
+        filetypes = { 'lua' },
         settings = {
           Lua = {
             runtime = { version = 'LuaJIT' },
@@ -163,37 +118,66 @@ return {
                 unpack(vim.api.nvim_get_runtime_file('', true)),
               },
             },
-            completion = {
-              callSnippet = 'Replace',
-            },
+            completion = { callSnippet = 'Replace' },
             diagnostics = { disable = { 'missing-fields' } },
           },
         },
       },
-    }
+    },
+  },
+  config = function(_, opts)
+    local lspconfig = require 'lspconfig'
 
-    require('mason').setup {}
+    -- LSP Keybindings
+    local function setup_lsp_keymaps(_, bufnr)
+      local map = function(keys, func, desc)
+        vim.keymap.set('n', keys, func, { buffer = bufnr, desc = 'LSP: ' .. desc })
+      end
 
-    local ensure_installed = vim.tbl_keys(servers or {})
+      -- Telescope-based LSP functions
+      local telescope = require 'telescope.builtin'
+      map('gd', telescope.lsp_definitions, 'Go to definition')
+      map('gr', telescope.lsp_references, 'Go to references')
+      map('gI', telescope.lsp_implementations, 'Go to implementation')
+      map('<leader>D', telescope.lsp_type_definitions, 'Type definition')
+      map('<leader>ds', telescope.lsp_document_symbols, 'Document symbols')
+      map('<leader>ws', telescope.lsp_dynamic_workspace_symbols, 'Workspace symbols')
+
+      -- General LSP functions
+      map('<leader>ca', vim.lsp.buf.code_action, 'Code action')
+      map('K', vim.lsp.buf.hover, 'Hover Documentation')
+      map('gD', vim.lsp.buf.declaration, 'Go to declaration')
+    end
+
+    -- Use Mason to install servers and tools
+    local ensure_installed = vim.tbl_keys(opts.servers)
     vim.list_extend(ensure_installed, {
       'mdformat',
       'prettier',
       'stylua',
       'taplo',
     })
-    require('mason-tool-installer').setup { ensure_installed = ensure_installed }
+
+    require('mason-tool-installer').setup {
+      ensure_installed = ensure_installed,
+    }
 
     require('mason-lspconfig').setup {
       automatic_installation = true,
       handlers = {
         function(server_name)
-          local server = servers[server_name] or {}
-          -- server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-          server.capabilities = require('blink.cmp').get_lsp_capabilities(server.capabilities)
-          require('lspconfig')[server_name].setup(server)
+          local config = opts.servers[server_name] or {}
+          if type(config.settings) == 'function' then
+            config.settings = config.settings()
+          end
+          config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
+
+          -- Add on_attach to apply keymaps
+          config.on_attach = setup_lsp_keymaps
+
+          lspconfig[server_name].setup(config)
         end,
       },
     }
   end,
 }
--- vim: ts=2 sts=2 sw=2 et

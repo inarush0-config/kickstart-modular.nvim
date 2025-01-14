@@ -1,43 +1,65 @@
+-- Configuration for noice.nvim
 return {
   'folke/noice.nvim',
+  commit = 'main',
   event = 'VeryLazy',
-  opts = {
-    -- add any options here
-  },
   dependencies = {
-    -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
     'MunifTanjim/nui.nvim',
-    -- OPTIONAL:
-    --   `nvim-notify` is only needed, if you want to use the notification view.
-    --   If not available, we use `mini` as the fallback
-    -- { 'rcarriga/nvim-notify', opts = {
-    --   timeout = 50,
-    -- } },
   },
-  config = function()
-    require('noice').setup {
-      lsp = {
-        -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-        override = {
-          ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
-          ['vim.lsp.util.stylize_markdown'] = true,
-          ['cmp.entry.get_documentation'] = true, -- requires hrsh7th/nvim-cmp
-        },
+  opts = {
+    cmdline = {
+      enabled = true,
+      view = 'cmdline_popup',
+      format = {
+        cmdline = { icon = '>' },
+        search_down = { icon = '🔍⌄' },
+        search_up = { icon = '🔍⌃' },
+        filter = { icon = '$' },
+        lua = { icon = '☾' },
+        help = { icon = '?' },
       },
-      -- you can enable a preset for easier configuration
-      presets = {
-        bottom_search = true, -- use a classic bottom cmdline for search
-        command_palette = true, -- position the cmdline and popupmenu together
-        inc_rename = false, -- enables an input dialog for inc-rename.nvim
-        long_message_to_split = true, -- long messages will be sent to a split
-        lsp_doc_border = false, -- add a border to hover docs and signature help
+    },
+    messages = {
+      enabled = true,
+      view = 'mini',
+      view_error = 'mini',
+      view_warn = 'mini',
+      view_history = 'messages',
+      view_search = 'virtualtext',
+    },
+    lsp = {
+      progress = {
+        enabled = true,
+        format = 'lsp_progress',
+        format_done = 'lsp_progress_done',
+        throttle = 1000 / 30,
       },
-      routes = {
-        {
-          view = 'notify',
-          filter = { event = 'msg_showmode' },
-        },
+      override = {
+        ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
+        ['vim.lsp.util.stylize_markdown'] = true,
+        ['cmp.entry.get_documentation'] = true,
       },
-    }
+      hover = {
+        enabled = true,
+      },
+      signature = {
+        enabled = true,
+      },
+    },
+    presets = {
+      bottom_search = true,
+      command_palette = true,
+      long_message_to_split = true,
+      inc_rename = false,
+      lsp_doc_border = false,
+    },
+  },
+  config = function(_, opts)
+    local ok, noice = pcall(require, 'noice')
+    if not ok then
+      vim.notify('Failed to load noice.nvim', vim.log.levels.ERROR)
+      return
+    end
+    noice.setup(opts)
   end,
 }

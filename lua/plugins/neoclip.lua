@@ -1,5 +1,6 @@
 return {
   'AckslD/nvim-neoclip.lua',
+  cmd = 'Telescope',
   keys = {
     { '<leader>sy', desc = 'Search YankRegisters' },
   },
