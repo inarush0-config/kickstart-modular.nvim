@@ -4,7 +4,7 @@ return {
   event = { 'BufReadPre', 'BufNewFile' },
   dependencies = {
     'saghen/blink.cmp',
-    { 'williamboman/mason.nvim', config = true },
+    { 'williamboman/mason.nvim', event = 'VimEnter', config = true },
     { 'williamboman/mason-lspconfig.nvim', config = true },
     { 'WhoIsSethDaniel/mason-tool-installer.nvim' },
     { 'j-hui/fidget.nvim', event = 'LspAttach', opts = {} },
