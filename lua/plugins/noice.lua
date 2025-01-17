@@ -26,6 +26,7 @@ return {
       view_warn = 'mini',
       view_history = 'messages',
       view_search = 'virtualtext',
+      view_recording = 'notify',
     },
     lsp = {
       progress = {
@@ -52,6 +53,12 @@ return {
       long_message_to_split = true,
       inc_rename = false,
       lsp_doc_border = false,
+    },
+    routes = {
+      {
+        view = 'notify',
+        filter = { event = 'msg_showmode' },
+      },
     },
   },
   config = function(_, opts)
