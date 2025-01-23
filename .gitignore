@@ -40,4 +40,4 @@ Temporary Items
 # iCloud generated files
 *.icloud
 
-/lua/plugins/work.lua
+/lua/plugins/work

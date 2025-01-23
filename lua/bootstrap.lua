@@ -19,11 +19,16 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   vim.notify('lazy.nvim installed successfully!', vim.log.levels.INFO)
 end
 
-local work_plugins = vim.fn.stdpath 'config' .. '/lua/plugins/work.lua'
-local plugins_spec = { { import = 'plugins' } }
-if vim.fn.filereadable(work_plugins) == 1 then
-  table.insert(plugins_spec, { import = 'plugins.work' })
-end
+local plugins_spec = {
+  { import = 'plugins' },
+  {
+    import = 'plugins.work',
+    cond = function()
+      local work_dir = vim.fn.stdpath 'config' .. '/lua/plugins/work'
+      return vim.fn.isdirectory(work_dir) == 1
+    end,
+  },
+}
 
 vim.opt.rtp:prepend(lazypath)
 
