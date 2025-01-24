@@ -43,12 +43,23 @@ return {
       docker_compose_language_service = {},
       marksman = { filetypes = { 'markdown', 'markdown.mdx' } },
       phpactor = { filetypes = { 'php' } },
-      pyright = {
+      -- pyright = {
+      --   filetypes = { 'python' },
+      --   settings = {
+      --     pyright = {
+      --       disableOrganizeImports = true,
+      --       analysis = { typeCheckingMode = 'strict' },
+      --     },
+      --   },
+      -- },
+      basedpyright = {
         filetypes = { 'python' },
         settings = {
-          pyright = {
+          basedpyright = {
             disableOrganizeImports = true,
-            analysis = { typeCheckingMode = 'strict' },
+            analysis = {
+              diagnosticMode = 'workspace',
+            },
           },
         },
       },
