@@ -46,6 +46,22 @@ vim.opt.listchars = { -- Define how hidden characters are displayed
   precedes = '‹',
 }
 
+-- Folding
+-- Enable folding
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+vim.opt.foldtext = 'v:lua.vim.treesitter.foldtext()'
+-- Start with all folds open
+vim.opt.foldlevel = 99
+-- Only fold more than 2 lines
+vim.opt.foldminlines = 2
+-- Show fold column
+vim.opt.foldcolumn = '1'
+-- Prevent folded lines from having their background overwritten
+vim.opt.highlight:append {
+  Folded = { bg = 'NONE' },
+}
+
 -- Filetype Associations
 vim.filetype.add {
   extension = {
