@@ -10,7 +10,7 @@ return {
       nerd_font_variant = 'mono', -- Adjust icon alignment for Nerd Fonts
     },
     sources = {
-      default = { 'lsp', 'path', 'snippets', 'buffer' }, -- Default sources
+      default = { 'lsp', 'path', 'buffer' }, -- Default sources
     },
   },
   config = function(_, opts)
