@@ -10,7 +10,13 @@ return {
     { '<leader>sk', '<cmd>Telescope keymaps<cr>', desc = 'Search keymaps' },
     { '<leader>ss', '<cmd>Telescope builtin<cr>', desc = 'Select search' },
     { '<leader>sw', '<cmd>Telescope grep_string<cr>', desc = 'Search current word' },
-    { '<leader>sz', '<cmd>Telescope chezmoi<cr>', desc = 'Search chezmoi files' },
+    {
+      '<leader>sz',
+      function()
+        require('telescope').extensions.chezmoi.find_files()
+      end,
+      desc = 'Search chezmoi files',
+    },
     {
       '<leader>sn',
       function()
@@ -117,8 +123,8 @@ return {
 
     -- Load extensions safely
     local function load_extension(name)
-      local ok = pcall(telescope.load_extension, name)
-      if not ok then
+      local load_ok = pcall(telescope.load_extension, name)
+      if not load_ok then
         vim.notify('Failed to load telescope extension: ' .. name, vim.log.levels.WARN)
       end
     end
