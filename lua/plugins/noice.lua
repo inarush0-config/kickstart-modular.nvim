@@ -1,7 +1,6 @@
 -- Configuration for noice.nvim
 return {
   'folke/noice.nvim',
-  commit = 'main',
   event = 'VeryLazy',
   dependencies = {
     'MunifTanjim/nui.nvim',
