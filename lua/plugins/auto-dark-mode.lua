@@ -1,5 +1,5 @@
 return {
-  event = 'VimEnter',
+  lazy = false,
   'f-person/auto-dark-mode.nvim',
   opts = {},
 }
