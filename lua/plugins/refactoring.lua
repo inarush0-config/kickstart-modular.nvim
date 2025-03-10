@@ -20,8 +20,8 @@ return {
     refactoring.setup {}
 
     -- Preserve your keymaps
-    vim.keymap.set('x', '<leader>re', ':Refactor extract ', { desc = 'Refactor extract' })
-    vim.keymap.set('x', '<leader>rv', ':Refactor extract_var ', { desc = 'Refactor extract var' })
+    vim.keymap.set('x', '<leader>re', ':Refactor extract ', { desc = 'Refactor extract ' })
+    vim.keymap.set('x', '<leader>rv', ':Refactor extract_var ', { desc = 'Refactor extract var ' })
     vim.keymap.set('n', '<leader>rb', ':Refactor extract_block', { desc = 'Refactor extract block' })
   end,
 }
