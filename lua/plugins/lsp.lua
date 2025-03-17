@@ -80,6 +80,7 @@ return {
           })
         end,
       },
+      ts_ls = {},
       yamlls = {
         filetypes = { 'yaml', 'yaml.docker-compose' },
         settings = function()
