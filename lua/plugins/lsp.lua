@@ -82,16 +82,21 @@ return {
       },
       ts_ls = {},
       yamlls = {
-        filetypes = { 'yaml', 'yaml.docker-compose' },
+        filetypes = { 'yaml', 'yaml.docker-compose', 'yaml.cloudformation' },
+        capabilities = {
+          workspace = {
+            didChangeConfiguration = { dynamicRegistration = true },
+          },
+        },
         settings = function()
-          local ok, schemastore = pcall(require, 'schemastore')
           return {
             yaml = {
               format = { enable = true },
               hover = true,
               completion = true,
-              schemaStore = { enable = false, url = '' },
-              schemas = ok and schemastore.yaml.schemas() or {},
+              validate = true,
+              schemaStore = { enable = false },
+              schemas = require('schemastore').yaml.schemas(),
               customTags = {
                 '!fn',
                 '!And',

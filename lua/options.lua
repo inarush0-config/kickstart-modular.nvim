@@ -104,3 +104,20 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.opt_local.shiftwidth = 2
   end,
 })
+
+-- yaml schema info command
+vim.api.nvim_create_user_command('YamlSchemaInfo', function()
+  local clients = vim.lsp.get_active_clients { bufnr = 0 }
+  for _, client in pairs(clients) do
+    if client.name == 'yamlls' then
+      local schema = client.config.settings.yaml.schemas[vim.api.nvim_buf_get_name(0)]
+      if schema then
+        print('Current schema: ' .. schema)
+      else
+        print 'No schema applied to this file'
+      end
+      return
+    end
+  end
+  print 'YAML language server not attached to this buffer'
+end, {})
