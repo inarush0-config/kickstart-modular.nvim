@@ -1,7 +1,7 @@
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 
 -- Install lazy.nvim if not installed
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
   vim.notify('Installing lazy.nvim...', vim.log.levels.INFO)
   local result = vim.fn.system {
     'git',

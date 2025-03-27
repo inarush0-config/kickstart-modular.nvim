@@ -48,8 +48,7 @@ vim.opt.listchars = { -- Define how hidden characters are displayed
 
 -- Enable folding
 vim.opt.foldmethod = 'expr'
-vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-vim.opt.foldtext = 'v:lua.vim.treesitter.foldtext()'
+vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
 
 -- Start with all folds open
 vim.opt.foldlevel = 99

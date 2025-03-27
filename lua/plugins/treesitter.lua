@@ -16,7 +16,7 @@ return {
         module.setup(config)
       end
       ---@diagnostic disable-next-line: missing-fields
-      setup_safely('nvim-treesitter.configs', {
+      require('nvim-treesitter.configs').setup {
         parser_install_dir = vim.fn.stdpath 'data' .. '/treesitter',
         sync_install = false,
         ensure_installed = {
@@ -37,7 +37,7 @@ return {
         auto_install = true,
         highlight = { enable = true },
         indent = { enable = true },
-      })
+      }
     end,
   },
   {
