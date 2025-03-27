@@ -16,4 +16,3 @@ for _, module in ipairs(modules) do
     vim.notify('Failed to load ' .. module .. ': ' .. err, vim.log.levels.WARN)
   end
 end
-

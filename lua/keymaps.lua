@@ -32,15 +32,3 @@ end, { desc = 'Show diagnostic error messages' })
 map('n', '<leader>q', function()
   vim.diagnostic.setloclist { source = true }
 end, { desc = 'Open diagnostic quickfix list' })
-
----------------------------
--- Window Navigation
----------------------------
-for key, dir in pairs {
-  h = 'left',
-  j = 'lower',
-  k = 'upper',
-  l = 'right',
-} do
-  map('n', '<C-' .. key .. '>', '<C-w><C-' .. key .. '>', { desc = 'Move focus to the ' .. dir .. ' window' })
-end
