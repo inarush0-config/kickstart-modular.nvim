@@ -3,6 +3,20 @@ return {
   cmd = 'Telescope',
   keys = {
     { '<leader>sb', '<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>', desc = 'Find in existing buffers' },
+    {
+      '<leader>sc',
+      function()
+        require('telescope.builtin').git_bcommits {
+          git_command = {
+            'git',
+            'log',
+            '--pretty=' .. '%h <%an> %s (%ar)',
+            '--follow',
+          },
+        }
+      end,
+      desc = 'Search current file git commit history',
+    },
     { '<leader>sd', '<cmd>Telescope diagnostics<cr>', desc = 'Search diagnostics' },
     { '<leader>sf', '<cmd>Telescope find_files<cr>', desc = 'Search files' },
     { '<leader>sg', '<cmd>Telescope live_grep<cr>', desc = 'Search by grep' },
