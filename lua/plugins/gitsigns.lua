@@ -71,8 +71,8 @@ return {
       row = 0,
       col = 1,
     },
-    yadm = {
-      enable = false, -- Disable YADM integration
-    },
+    -- yadm = {
+    --   enable = false, -- Disable YADM integration
+    -- },
   },
 }
