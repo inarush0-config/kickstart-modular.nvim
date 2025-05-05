@@ -171,6 +171,7 @@ return {
       'prettier',
       'stylua',
       'taplo',
+      'shfmt',
     })
 
     require('mason-tool-installer').setup {

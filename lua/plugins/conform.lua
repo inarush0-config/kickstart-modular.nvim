@@ -18,6 +18,8 @@ return {
         'ruff_format',
         'ruff_organize_imports',
       },
+      sh = { 'shfmt' },
+      bash = { 'shfmt' },
     },
   },
   config = function(_, opts)
