@@ -4,7 +4,6 @@ test.sh
 nvim
 
 spell/
-lazy-lock.json
 #--------------------------------------------------#
 # The following was generated with gitignore.nvim: #
 #--------------------------------------------------#
