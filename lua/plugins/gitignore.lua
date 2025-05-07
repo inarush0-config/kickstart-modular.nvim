@@ -1,7 +1,6 @@
--- Plugin for managing .gitignore files
 return {
   'wintermute-cell/gitignore.nvim',
-  cmd = 'Gitignore', -- Lazy-load when the Gitignore command is used
+  cmd = 'Gitignore',
   keys = {
     {
       '<leader>gi',
@@ -16,6 +15,5 @@ return {
       vim.notify('Failed to load gitignore.nvim', vim.log.levels.ERROR)
       return
     end
-    -- Additional configuration can be added here if needed
   end,
 }

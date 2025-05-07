@@ -1,4 +1,3 @@
--- Configuration for noice.nvim
 return {
   'folke/noice.nvim',
   event = 'VeryLazy',

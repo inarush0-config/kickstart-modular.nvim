@@ -11,7 +11,6 @@ return {
     'MunifTanjim/nui.nvim',
   },
   init = function()
-    -- Unless you are still migrating, remove the deprecated commands
     vim.g.neo_tree_remove_legacy_commands = true
   end,
   config = function()
@@ -60,6 +59,7 @@ return {
       source_selector = {
         winbar = true,
         content_layout = 'center',
+        truncation_character = '...',
         sources = {
           { source = 'filesystem' },
           { source = 'buffers' },
@@ -92,7 +92,7 @@ return {
         position = 'right',
         mappings = {
           ['Y'] = copy_path,
-          ['<space>'] = false, -- disable space mapping
+          ['<space>'] = false,
         },
         width = 35,
       },
@@ -103,6 +103,7 @@ return {
           folder_open = '',
           folder_empty = '',
           folder_empty_open = '',
+          default = '*',
         },
         git_status = {
           symbols = {

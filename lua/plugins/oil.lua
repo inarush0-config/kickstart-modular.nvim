@@ -1,11 +1,11 @@
 return {
   'stevearc/oil.nvim',
-  cmd = 'Oil', -- Lazy-load with the Oil command
+  cmd = 'Oil',
   keys = {
-    { '-', desc = 'Open parent directory' }, -- Preserved your keymap
+    { '-', desc = 'Open parent directory' },
   },
   opts = {},
-  dependencies = { 'nvim-tree/nvim-web-devicons' }, -- Optional dependency preserved
+  dependencies = { 'nvim-tree/nvim-web-devicons' },
   config = function()
     local ok, oil = pcall(require, 'oil')
     if not ok then
@@ -13,7 +13,6 @@ return {
       return
     end
 
-    -- Setup Oil with your original configuration
     oil.setup {
       keymaps = {
         ['<C-h>'] = false,
@@ -22,7 +21,6 @@ return {
       },
     }
 
-    -- Reapply your keymap
     vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
   end,
 }

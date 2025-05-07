@@ -1,49 +1,48 @@
--- Plugin for displaying keybinding hints
 return {
   'folke/which-key.nvim',
-  event = 'VeryLazy', -- Load during idle time to reduce startup time
+  event = 'VeryLazy',
   opts = {
-    preset = 'modern', -- Choose layout preset: 'classic', 'modern', 'helix'
+    preset = 'modern',
     delay = function(ctx)
-      return ctx.plugin and 0 or 200 -- Delay popup for keymaps (default: 200ms)
+      return ctx.plugin and 0 or 200
     end,
-    notify = true, -- Show warnings for issues with mappings
+    notify = true,
     plugins = {
-      marks = true, -- Show marks in the popup
-      registers = true, -- Show registers in the popup
+      marks = true,
+      registers = true,
       spelling = {
-        enabled = true, -- Show spelling suggestions in the popup
-        suggestions = 20, -- Number of spelling suggestions to display
+        enabled = true,
+        suggestions = 20,
       },
       presets = {
-        operators = true, -- Help for operators (e.g., `d`, `y`)
-        motions = true, -- Help for motions
-        text_objects = true, -- Help for text objects after an operator
-        windows = true, -- Help for `<C-w>` window commands
-        nav = true, -- Help for navigation commands
-        z = true, -- Help for `z` prefixed commands (folds, spelling, etc.)
-        g = true, -- Help for `g` prefixed commands
+        operators = true,
+        motions = true,
+        text_objects = true,
+        windows = true,
+        nav = true,
+        z = true,
+        g = true,
       },
     },
     win = {
-      no_overlap = true, -- Prevent popup from overlapping with cursor
-      padding = { 1, 2 }, -- Add padding around the popup
-      title = true, -- Show a title for the popup
-      title_pos = 'center', -- Position the title in the center
-      zindex = 1000, -- Z-index for the popup
+      no_overlap = true,
+      padding = { 1, 2 },
+      title = true,
+      title_pos = 'center',
+      zindex = 1000,
     },
     layout = {
-      width = { min = 20 }, -- Minimum width for the columns
-      spacing = 3, -- Spacing between columns
+      width = { min = 20 },
+      spacing = 3,
     },
     icons = {
-      breadcrumb = '»', -- Symbol for breadcrumbs
-      separator = '➜', -- Symbol between key and description
-      group = '+', -- Symbol for groups
+      breadcrumb = '»',
+      separator = '➜',
+      group = '+',
     },
-    show_help = true, -- Show a help message in the command line
-    show_keys = true, -- Show the currently pressed keys in the command line
-    sort = { 'local', 'order', 'group', 'alphanum', 'mod' }, -- Sorting order for mappings
+    show_help = true,
+    show_keys = true,
+    sort = { 'local', 'order', 'group', 'alphanum', 'mod' },
   },
   config = function(_, opts)
     local ok, which_key = pcall(require, 'which-key')
@@ -52,10 +51,8 @@ return {
       return
     end
 
-    -- Initialize with options
     which_key.setup(opts)
 
-    -- Register group descriptions using the new keymap spec
     which_key.add {
       { '<leader>b', group = 'Buffer' },
       { '<leader>c', group = 'Code' },
@@ -68,7 +65,6 @@ return {
       { '<leader>w', group = 'Workspace' },
     }
 
-    -- Example: Add a mapping for buffer-local keymaps
     which_key.add {
       {
         '<leader>?',

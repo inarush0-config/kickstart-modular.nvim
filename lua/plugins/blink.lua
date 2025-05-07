@@ -1,16 +1,15 @@
--- Configuration for blink.cmp
 return {
   'saghen/blink.cmp',
-  dependencies = 'rafamadriz/friendly-snippets', -- Snippet source dependency
-  version = '*', -- Use the latest version
+  dependencies = 'rafamadriz/friendly-snippets',
+  version = '*',
   opts = {
-    keymap = { preset = 'default' }, -- Keymap preset
+    keymap = { preset = 'default' },
     appearance = {
-      use_nvim_cmp_as_default = true, -- Use nvim-cmp highlight groups
-      nerd_font_variant = 'mono', -- Adjust icon alignment for Nerd Fonts
+      use_nvim_cmp_as_default = true,
+      nerd_font_variant = 'mono',
     },
     sources = {
-      default = { 'lsp', 'path', 'buffer' }, -- Default sources
+      default = { 'lsp', 'path', 'buffer' },
     },
   },
   config = function(_, opts)
@@ -19,8 +18,6 @@ return {
       vim.notify('Failed to load blink.cmp', vim.log.levels.ERROR)
       return
     end
-
-    -- Validate menu positioning if needed (cmdline_position no longer accessed directly)
     blink.setup(opts)
   end,
 }

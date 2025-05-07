@@ -1,14 +1,11 @@
--- LSP Configuration and Management
 return {
   'neovim/nvim-lspconfig',
   event = { 'BufReadPre', 'BufNewFile' },
   dependencies = {
     'saghen/blink.cmp',
-    { 'williamboman/mason.nvim', event = 'VimEnter', config = true },
-    { 'williamboman/mason-lspconfig.nvim', config = true },
-    { 'WhoIsSethDaniel/mason-tool-installer.nvim' },
+    { 'mason-org/mason.nvim', event = 'VimEnter', config = true },
+    { 'mason-org/mason-lspconfig.nvim', config = true },
     { 'j-hui/fidget.nvim', event = 'LspAttach', opts = {} },
-    { 'folke/neodev.nvim', opts = {} },
     { 'b0o/schemastore.nvim' },
   },
   opts = {
@@ -43,15 +40,6 @@ return {
       docker_compose_language_service = {},
       marksman = { filetypes = { 'markdown', 'markdown.mdx' } },
       phpactor = { filetypes = { 'php' } },
-      -- pyright = {
-      --   filetypes = { 'python' },
-      --   settings = {
-      --     pyright = {
-      --       disableOrganizeImports = true,
-      --       analysis = { typeCheckingMode = 'strict' },
-      --     },
-      --   },
-      -- },
       basedpyright = {
         filetypes = { 'python' },
         settings = {
@@ -121,79 +109,31 @@ return {
           }
         end,
       },
-      lua_ls = {
-        filetypes = { 'lua' },
-        settings = {
-          Lua = {
-            runtime = { version = 'LuaJIT' },
-            workspace = {
-              checkThirdParty = false,
-              library = {
-                '${3rd}/luv/library',
-                unpack(vim.api.nvim_get_runtime_file('', true)),
-              },
-            },
-            completion = { callSnippet = 'Replace' },
-            diagnostics = { disable = { 'missing-fields' } },
-          },
-        },
-      },
+      lua_ls = {},
     },
   },
   config = function(_, opts)
-    local lspconfig = require 'lspconfig'
-
-    -- LSP Keybindings
-    local function setup_lsp_keymaps(_, bufnr)
-      local map = function(keys, func, desc)
-        vim.keymap.set('n', keys, func, { buffer = bufnr, desc = 'LSP: ' .. desc })
-      end
-
-      -- Telescope-based LSP functions
-      local telescope = require 'telescope.builtin'
-      map('gd', telescope.lsp_definitions, 'Go to definition')
-      map('gr', telescope.lsp_references, 'Go to references')
-      map('gI', telescope.lsp_implementations, 'Go to implementation')
-      map('<leader>D', telescope.lsp_type_definitions, 'Type definition')
-      map('<leader>ds', telescope.lsp_document_symbols, 'Document symbols')
-      map('<leader>ws', telescope.lsp_dynamic_workspace_symbols, 'Workspace symbols')
-
-      -- General LSP functions
-      map('<leader>ca', vim.lsp.buf.code_action, 'Code action')
-      map('K', vim.lsp.buf.hover, 'Hover Documentation')
-      map('gD', vim.lsp.buf.declaration, 'Go to declaration')
+    local map = function(keys, func, desc)
+      vim.keymap.set('n', keys, func, { desc = 'LSP: ' .. desc })
     end
 
-    -- Use Mason to install servers and tools
-    local ensure_installed = vim.tbl_keys(opts.servers)
-    vim.list_extend(ensure_installed, {
-      'mdformat',
-      'prettier',
-      'stylua',
-      'taplo',
-      'shfmt',
-    })
+    local telescope = require 'telescope.builtin'
+    map('gd', telescope.lsp_definitions, 'Go to definition')
+    map('gr', telescope.lsp_references, 'Go to references')
+    map('gI', telescope.lsp_implementations, 'Go to implementation')
+    map('<leader>D', telescope.lsp_type_definitions, 'Type definition')
+    map('<leader>ds', telescope.lsp_document_symbols, 'Document symbols')
+    map('<leader>ws', telescope.lsp_dynamic_workspace_symbols, 'Workspace symbols')
 
-    require('mason-tool-installer').setup {
-      ensure_installed = ensure_installed,
-    }
+    map('<leader>ca', vim.lsp.buf.code_action, 'Code action')
+    map('K', vim.lsp.buf.hover, 'Hover Documentation')
+    map('gD', vim.lsp.buf.declaration, 'Go to declaration')
+
+    local ensure_installed = vim.tbl_keys(opts.servers)
 
     require('mason-lspconfig').setup {
-      automatic_installation = true,
-      handlers = {
-        function(server_name)
-          local config = opts.servers[server_name] or {}
-          if type(config.settings) == 'function' then
-            config.settings = config.settings()
-          end
-          config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
-
-          -- Add on_attach to apply keymaps
-          config.on_attach = setup_lsp_keymaps
-
-          lspconfig[server_name].setup(config)
-        end,
-      },
+      ensure_installed = ensure_installed,
+      automatic_enable = true,
     }
   end,
 }

@@ -1,7 +1,7 @@
 return {
   'HiPhish/rainbow-delimiters.nvim',
   opts = {
-    strategy = { 'global' }, -- Example: Apply globally, configurable if needed
+    strategy = { 'global' },
   },
   config = function(_, opts)
     local ok, rainbow_delimiters = pcall(require, 'rainbow-delimiters')
@@ -10,7 +10,6 @@ return {
       return
     end
 
-    -- Setup rainbow-delimiters with your provided options
     rainbow_delimiters.setup(opts)
   end,
 }

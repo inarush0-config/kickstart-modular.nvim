@@ -1,6 +1,6 @@
 return {
   'someone-stole-my-name/yaml-companion.nvim',
-  ft = { 'yaml' }, -- Only load for yaml files
+  ft = { 'yaml' },
   keys = {
     { '<leader>ym', desc = 'YAML Schema Selection' },
   },

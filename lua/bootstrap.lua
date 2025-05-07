@@ -11,12 +11,9 @@ if not vim.uv.fs_stat(lazypath) then
     '--branch=stable',
     lazypath,
   }
-
-  if vim.api.nvim_get_vvar 'shell_error' ~= 0 then
-    vim.api.nvim_err_writeln('Failed to install lazy.nvim:\n\n' .. result)
-    return
+  if vim.v.shell_error ~= 0 then
+    error('Error cloning lazy.nvim:\n' .. result)
   end
-  vim.notify('lazy.nvim installed successfully!', vim.log.levels.INFO)
 end
 
 local plugins_spec = {

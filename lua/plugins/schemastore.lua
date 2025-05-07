@@ -5,6 +5,5 @@ return {
       vim.notify('Failed to load schemastore.nvim', vim.log.levels.ERROR)
       return
     end
-    -- Additional integration with LSP can be added in other configurations.
   end,
 }

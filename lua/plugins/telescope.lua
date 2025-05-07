@@ -135,7 +135,6 @@ return {
       },
     }
 
-    -- Load extensions safely
     local function load_extension(name)
       local load_ok = pcall(telescope.load_extension, name)
       if not load_ok then

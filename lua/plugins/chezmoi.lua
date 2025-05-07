@@ -1,8 +1,7 @@
--- Chezmoi plugin for managing dotfiles within Neovim
 return {
   'xvzc/chezmoi.nvim',
-  cmd = 'Chezmoi', -- Lazy-load when this command is called
-  dependencies = { 'nvim-lua/plenary.nvim' }, -- Required dependency
+  cmd = 'Chezmoi',
+  dependencies = { 'nvim-lua/plenary.nvim' },
 
   config = function()
     local success, chezmoi = pcall(require, 'chezmoi')
@@ -12,19 +11,17 @@ return {
     end
 
     chezmoi.setup {
-      -- General settings
       edit = {
-        watch = true, -- Watch for changes in dotfiles
-        force = false, -- Do not overwrite changes without confirmation
+        watch = true,
+        force = false,
       },
       notification = {
-        on_open = true, -- Notify on opening dotfiles
-        on_apply = true, -- Notify on applying changes
-        on_watch = false, -- Do not notify on file watching
+        on_open = true,
+        on_apply = true,
+        on_watch = false,
       },
-      -- Telescope integration
       telescope = {
-        select = { '<CR>' }, -- Key to confirm selection
+        select = { '<CR>' },
       },
     }
   end,

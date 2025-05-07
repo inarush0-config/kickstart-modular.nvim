@@ -4,21 +4,12 @@ return {
     event = { 'BufReadPost', 'BufNewFile' },
     build = ':TSUpdate',
     config = function()
-      -- Add this line to set the runtime path
       vim.opt.runtimepath:append(vim.fn.stdpath 'data' .. '/treesitter')
-
-      local setup_safely = function(plugin, config)
-        local status_ok, module = pcall(require, plugin)
-        if not status_ok then
-          vim.notify('Failed to load ' .. plugin, vim.log.levels.WARN)
-          return
-        end
-        module.setup(config)
-      end
-      ---@diagnostic disable-next-line: missing-fields
       require('nvim-treesitter.configs').setup {
         parser_install_dir = vim.fn.stdpath 'data' .. '/treesitter',
         sync_install = false,
+        modules = {},
+        ignore_install = {},
         ensure_installed = {
           'bash',
           'c',
