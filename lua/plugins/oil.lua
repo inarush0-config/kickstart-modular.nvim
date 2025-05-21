@@ -14,6 +14,7 @@ return {
     end
 
     oil.setup {
+      watch_for_changes = true,
       keymaps = {
         ['<C-h>'] = false,
         ['<C-l>'] = false,
