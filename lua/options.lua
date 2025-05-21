@@ -103,3 +103,9 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.opt_local.shiftwidth = 2
   end,
 })
+
+-- Clean up white space
+vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
+  pattern = { '*' },
+  command = [[%s/\s\+$//e]],
+})
