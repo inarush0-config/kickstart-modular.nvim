@@ -4,6 +4,8 @@ local function map(mode, lhs, rhs, opts)
   vim.keymap.set(mode, lhs, rhs, opts)
 end
 
+map('n', 's', '<Nop>') -- disable 's' in favor of mini.surround
+
 map('n', '<Esc>', '<cmd>nohlsearch<CR>', { desc = 'Disable Highlight' })
 
 map('n', '<C-s>', '<Cmd>write<CR>', { desc = 'Save for muscle memory' })
