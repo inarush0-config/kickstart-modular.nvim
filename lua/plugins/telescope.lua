@@ -25,6 +25,13 @@ return {
     { '<leader>ss', '<cmd>Telescope builtin<cr>', desc = 'Select search' },
     { '<leader>sw', '<cmd>Telescope grep_string<cr>', desc = 'Search current word' },
     {
+      '<leader>sy',
+      function()
+        require('telescope').extensions.neoclip.default()
+      end,
+      desc = 'Search Yank Registers',
+    },
+    {
       '<leader>sz',
       function()
         require('telescope').extensions.chezmoi.find_files()
