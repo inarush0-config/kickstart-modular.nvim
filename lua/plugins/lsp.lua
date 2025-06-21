@@ -69,6 +69,7 @@ return {
         end,
       },
       ts_ls = {},
+      svelte = {},
       yamlls = {
         filetypes = { 'yaml', 'yaml.docker-compose', 'yaml.cloudformation' },
         capabilities = {
