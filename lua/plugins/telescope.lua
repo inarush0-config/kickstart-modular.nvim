@@ -86,6 +86,7 @@ return {
           'rg',
           '--follow',
           '--hidden',
+          '--no-ignore',
           '--no-heading',
           '--with-filename',
           '--line-number',
@@ -104,7 +105,6 @@ return {
           '%.git/',
           '%.terraform/',
           'node_modules/',
-          '%.venv/',
           '%.pyc',
           '%.pytest_cache/',
           '%.DS_Store',
@@ -115,7 +115,7 @@ return {
       },
       pickers = {
         find_files = {
-          find_command = { 'fd', '--type', 'f', '--strip-cwd-prefix' },
+          find_command = { 'fd', '--type', 'f', '--strip-cwd-prefix', '--exclude', '.venv' },
           hidden = true,
           no_ignore = true,
           no_ignore_parent = true,
