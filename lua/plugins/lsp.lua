@@ -31,109 +31,104 @@ return {
     capabilities.general = capabilities.general or {}
     capabilities.general.positionEncodings = { 'utf-8' }
 
-    -- Configure servers using vim.lsp.config (Neovim 0.11+)
-    vim.lsp.config('basedpyright', {
-      capabilities = capabilities,
-      settings = {
-        basedpyright = {
-          disableOrganizeImports = true,
-          analysis = {
-            diagnosticMode = 'workspace',
+    -- Define server configurations
+    local servers = {
+      basedpyright = {
+        capabilities = capabilities,
+        settings = {
+          basedpyright = {
+            disableOrganizeImports = true,
+            analysis = {
+              diagnosticMode = 'workspace',
+            },
           },
         },
       },
-    })
-
-    vim.lsp.config('ruff', {
-      capabilities = capabilities,
-      init_options = {
-        settings = { args = { '--select=ALL' } },
-      },
-    })
-
-    vim.lsp.config('gopls', {
-      capabilities = capabilities,
-      settings = {
-        gopls = {
-          analyses = { unusedparams = true },
-          staticcheck = true,
-          gofumpt = true,
+      ruff = {
+        capabilities = capabilities,
+        init_options = {
+          settings = { args = { '--select=ALL' } },
         },
       },
-    })
-
-    vim.lsp.config('terraformls', {
-      capabilities = capabilities,
-      on_attach = function()
-        vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
-          pattern = { '*.tf', '*.tfvars', '*.hcl' },
-          callback = function()
-            vim.lsp.buf.format()
-          end,
-        })
-      end,
-    })
-
-    vim.lsp.config('jsonls', {
-      capabilities = capabilities,
-      settings = {
-        json = {
-          schemas = require('schemastore').json.schemas(),
-          validate = { enable = true },
-        },
-      },
-    })
-
-    vim.lsp.config('yamlls', {
-      capabilities = capabilities,
-      settings = {
-        yaml = {
-          format = { enable = true },
-          hover = true,
-          completion = true,
-          validate = true,
-          schemaStore = { enable = false },
-          schemas = require('schemastore').yaml.schemas(),
-          customTags = {
-            '!fn',
-            '!And',
-            '!If',
-            '!Not',
-            '!Equals',
-            '!Or',
-            '!FindInMap sequence',
-            '!Base64',
-            '!Cidr',
-            '!Ref',
-            '!Ref Scalar',
-            '!Sub',
-            '!GetAtt',
-            '!GetAZs',
-            '!ImportValue',
-            '!Select',
-            '!Split',
-            '!Join sequence',
+      gopls = {
+        capabilities = capabilities,
+        settings = {
+          gopls = {
+            analyses = { unusedparams = true },
+            staticcheck = true,
+            gofumpt = true,
           },
         },
       },
-    })
+      golangci_lint_ls = { capabilities = capabilities },
+      terraformls = {
+        capabilities = capabilities,
+        on_attach = function()
+          vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
+            pattern = { '*.tf', '*.tfvars', '*.hcl' },
+            callback = function()
+              vim.lsp.buf.format()
+            end,
+          })
+        end,
+      },
+      ts_ls = { capabilities = capabilities },
+      lua_ls = { capabilities = capabilities },
+      jsonls = {
+        capabilities = capabilities,
+        settings = {
+          json = {
+            schemas = require('schemastore').json.schemas(),
+            validate = { enable = true },
+          },
+        },
+      },
+      yamlls = {
+        capabilities = capabilities,
+        settings = {
+          yaml = {
+            format = { enable = true },
+            hover = true,
+            completion = true,
+            validate = true,
+            schemaStore = { enable = false },
+            schemas = require('schemastore').yaml.schemas(),
+            customTags = {
+              '!fn',
+              '!And',
+              '!If',
+              '!Not',
+              '!Equals',
+              '!Or',
+              '!FindInMap sequence',
+              '!Base64',
+              '!Cidr',
+              '!Ref',
+              '!Ref Scalar',
+              '!Sub',
+              '!GetAtt',
+              '!GetAZs',
+              '!ImportValue',
+              '!Select',
+              '!Split',
+              '!Join sequence',
+            },
+          },
+        },
+      },
+      bashls = { capabilities = capabilities },
+      dockerls = { capabilities = capabilities },
+      marksman = { capabilities = capabilities },
+    }
 
-    -- Mason setup - just for installation
+    -- Configure all servers
+    for name, config in pairs(servers) do
+      vim.lsp.config(name, config)
+    end
+
+    -- Auto-generate ensure_installed from configured servers
     require('mason-lspconfig').setup {
-      ensure_installed = {
-        'basedpyright',
-        'ruff',
-        'gopls',
-        'golangci_lint_ls',
-        'terraformls',
-        'ts_ls',
-        'lua_ls',
-        'yamlls',
-        'jsonls',
-        'bashls',
-        'dockerls',
-        'marksman',
-      },
+      ensure_installed = vim.tbl_keys(servers),
     }
   end,
 }
