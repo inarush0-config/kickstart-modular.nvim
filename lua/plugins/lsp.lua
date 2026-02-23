@@ -120,6 +120,7 @@ return {
       dockerls = { capabilities = capabilities },
       marksman = { capabilities = capabilities },
     }
+            svelte = { capabilities = capabilities },
 
     -- Configure all servers
     for name, config in pairs(servers) do
