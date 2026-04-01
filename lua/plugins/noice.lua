@@ -27,15 +27,11 @@ return {
       view_recording = 'notify',
     },
     lsp = {
+      -- Neovim 0.12 handles LSP progress natively; Noice's handler causes spam
       progress = {
-        enabled = true,
-        format = 'lsp_progress',
-        format_done = 'lsp_progress_done',
-        throttle = 1000 / 30,
+        enabled = false,
       },
       override = {
-        ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
-        ['vim.lsp.util.stylize_markdown'] = true,
         ['cmp.entry.get_documentation'] = true,
       },
       hover = {
