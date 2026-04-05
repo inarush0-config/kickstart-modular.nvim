@@ -4,6 +4,13 @@ return {
     lazy = false,
     branch = 'main',
     build = ':TSUpdate',
+    config = function()
+      vim.api.nvim_create_autocmd('FileType', {
+        callback = function()
+          pcall(vim.treesitter.start)
+        end,
+      })
+    end,
   },
   {
     'nvim-treesitter/nvim-treesitter-context',
@@ -13,6 +20,5 @@ return {
       vim.cmd 'hi TreesitterContextBottom gui=underline'
     end,
   },
-  { 'nvim-treesitter/nvim-treesitter-textobjects' },
 }
 -- vim: ts=2 sts=2 sw=2 et
