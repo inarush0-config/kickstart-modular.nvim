@@ -5,7 +5,18 @@ return {
     'saghen/blink.cmp',
     { 'mason-org/mason.nvim', event = 'VimEnter', config = true },
     { 'mason-org/mason-lspconfig.nvim' },
-    { 'j-hui/fidget.nvim', event = 'LspAttach', opts = {} },
+    {
+      'j-hui/fidget.nvim',
+      event = 'LspAttach',
+      opts = {
+        progress = {
+          suppress_on_insert = true,
+          display = {
+            done_ttl = 0,
+          },
+        },
+      },
+    },
     { 'b0o/schemastore.nvim' },
     'folke/lazydev.nvim',
   },
