@@ -12,6 +12,7 @@ return {
       })
     end,
   },
+  { 'nvim-treesitter/nvim-treesitter-textobjects', branch = 'main', lazy = false },
   {
     'nvim-treesitter/nvim-treesitter-context',
     config = function()
