@@ -11,6 +11,7 @@ vim.opt.termguicolors = true -- Enable true color support
 vim.opt.expandtab = true -- Use spaces instead of tabs
 vim.opt.shiftwidth = 4 -- Number of spaces to use for (auto)indent
 vim.opt.tabstop = 4 -- Number of spaces per tab
+vim.opt.autoindent = true -- Copy indent from current line when starting a new line
 vim.opt.spelllang = 'en_us' -- Set spell check language to US English
 vim.opt.spell = true -- Enable spell check
 vim.opt.breakindent = true -- Maintain indentation when wrapping lines
