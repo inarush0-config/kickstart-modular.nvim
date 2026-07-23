@@ -144,6 +144,7 @@ return {
       dockerls = { capabilities = capabilities },
       marksman = { capabilities = capabilities },
     }
+            typos_lsp = { capabilities = capabilities },
 
     -- Configure all servers
     for name, config in pairs(servers) do
