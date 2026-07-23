@@ -16,6 +16,7 @@ return {
   { 'nvim-treesitter/nvim-treesitter-textobjects', branch = 'main', lazy = false },
   {
     'nvim-treesitter/nvim-treesitter-context',
+    lazy = false,
     config = function()
       require('treesitter-context').setup()
       vim.api.nvim_set_hl(0, 'TreesitterContext', { fg = 'fg', bg = 'bg' })
