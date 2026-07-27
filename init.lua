@@ -9,10 +9,10 @@ vim.g.have_nerd_font = true
 vim.loader.enable()
 
 -- Load core configurations with error handling
-local modules = { 'options', 'keymaps', 'bootstrap' }
+local modules = { 'options', 'keymaps', 'bootstrap', 'filetypes' }
 for _, module in ipairs(modules) do
-  local ok, err = pcall(require, module)
-  if not ok then
-    vim.notify('Failed to load ' .. module .. ': ' .. err, vim.log.levels.WARN)
-  end
+    local ok, err = pcall(require, module)
+    if not ok then
+        vim.notify('Failed to load ' .. module .. ': ' .. err, vim.log.levels.WARN)
+    end
 end
