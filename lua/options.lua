@@ -111,3 +111,8 @@ vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
     pattern = { '*' },
     command = [[%s/\s\+$//e]],
 })
+
+-- Override xdg-open timeout
+vim.ui.open = function(path)
+    vim.fn.jobstart({ "xdg-open", path }, { detatch = true })
+end
