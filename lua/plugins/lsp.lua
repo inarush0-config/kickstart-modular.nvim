@@ -84,7 +84,6 @@ return {
                     })
                 end,
             },
-            ts_ls = { capabilities = capabilities },
             svelte = { capabilities = capabilities },
             lua_ls = {
                 capabilities = capabilities,
