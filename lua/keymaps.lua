@@ -25,3 +25,7 @@ end, { desc = 'Show diagnostic error messages' })
 map('n', '<leader>q', function()
   vim.diagnostic.setloclist { source = true }
 end, { desc = 'Open diagnostic quickfix list' })
+
+map('n', 'gtd', function()
+    vim.cmd("TSToolsGoToSourceDefinition")
+end, { desc = 'Typescript Go To Source Definition' })

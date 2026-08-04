@@ -30,6 +30,7 @@ return {
         map('gd', telescope.lsp_definitions, 'Go to definition')
         map('gr', telescope.lsp_references, 'Go to references')
         map('gI', telescope.lsp_implementations, 'Go to implementation')
+        map('gtt', vim.lsp.buf.type_definition, 'Go to Type Definition')
         map('<leader>D', telescope.lsp_type_definitions, 'Type definition')
         map('<leader>ds', telescope.lsp_document_symbols, 'Document symbols')
         map('<leader>ws', telescope.lsp_dynamic_workspace_symbols, 'Workspace symbols')
