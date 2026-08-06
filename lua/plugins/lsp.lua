@@ -144,6 +144,7 @@ return {
             dockerls = { capabilities = capabilities },
             marksman = { capabilities = capabilities },
             typos_lsp = { capabilities = capabilities },
+            html = { capabilities = capabilities },
         }
 
         -- Configure all servers
