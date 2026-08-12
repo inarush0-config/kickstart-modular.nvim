@@ -12,4 +12,5 @@ return {
 
     rainbow_delimiters.setup(opts)
   end,
+    event = 'VeryLazy',
 }

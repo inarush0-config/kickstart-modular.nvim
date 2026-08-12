@@ -2,6 +2,7 @@ return {
   'xvzc/chezmoi.nvim',
   cmd = 'Chezmoi',
   dependencies = { 'nvim-lua/plenary.nvim' },
+    event = "VeryLazy",
 
   config = function()
     local success, chezmoi = pcall(require, 'chezmoi')

@@ -8,6 +8,7 @@ return {
       end,
       expr = true,
       desc = 'Rename symbol (inline)',
+    event = "VeryLazy",
     },
   },
   opts = {},

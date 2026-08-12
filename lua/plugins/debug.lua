@@ -11,6 +11,7 @@ return {
   config = function()
     local dap = require 'dap'
     local dapui = require 'dapui'
+    event = "VeryLazy",
 
     require('mason-nvim-dap').setup {
       automatic_setup = true,

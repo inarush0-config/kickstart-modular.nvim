@@ -8,6 +8,7 @@ return {
         vim.cmd 'Gitignore'
       end,
       desc = 'Open Gitignore popup',
+    event = "VeryLazy",
     },
   },
   config = function()

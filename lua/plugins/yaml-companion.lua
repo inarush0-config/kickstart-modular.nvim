@@ -14,4 +14,5 @@ return {
     local yaml = require 'yaml-companion'
     vim.keymap.set('n', '<leader>ym', yaml.open_ui_select)
   end,
+    event = "VeryLazy",
 }

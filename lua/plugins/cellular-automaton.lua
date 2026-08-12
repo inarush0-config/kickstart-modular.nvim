@@ -6,4 +6,5 @@ return {
       desc = 'Start "make it rain" animation',
     })
   end,
+    event = "VeryLazy",
 }
