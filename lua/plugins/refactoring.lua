@@ -1,25 +1,31 @@
 return {
-  'ThePrimeagen/refactoring.nvim',
-  keys = {
-    { '<leader>re', mode = 'x', desc = 'Refactor extract' },
-    { '<leader>rv', mode = 'x', desc = 'Refactor extract var' },
-    { '<leader>rb', mode = 'n', desc = 'Refactor extract block' },
-  },
-  dependencies = {
-    'nvim-lua/plenary.nvim',
-    'nvim-treesitter/nvim-treesitter',
-  },
-  config = function()
-    local ok, refactoring = pcall(require, 'refactoring')
-    if not ok then
-      vim.notify('Failed to load refactoring.nvim', vim.log.levels.ERROR)
-      return
-    end
+    'ThePrimeagen/refactoring.nvim',
+    dependencies = {
+        "nvim-treesitter/nvim-treesitter",
+        "lewis6991/async.nvim",
+    },
+    keys = {
+        { "<leader>re", mode = "v", desc = "Extract Function" },
+        { "<leader>rv", mode = "v", desc = "Extract Variable" },
+        { "<leader>rb", mode = "n", desc = "Extract Block" },
+    },
+    config = function()
+        local refactoring = require("refactoring")
+        refactoring.setup()
 
-    refactoring.setup {}
+        -- Visual-mode Extract Function
+        vim.keymap.set("v", "<leader>re", function()
+            return refactoring.extract_func()
+        end, { desc = "Extract Function", expr = true })
 
-    vim.keymap.set('x', '<leader>re', ':Refactor extract ', { desc = 'Refactor extract ' })
-    vim.keymap.set('x', '<leader>rv', ':Refactor extract_var ', { desc = 'Refactor extract var ' })
-    vim.keymap.set('n', '<leader>rb', ':Refactor extract_block', { desc = 'Refactor extract block' })
-  end,
+        -- Visual-mode Extract Variable
+        vim.keymap.set("v", "<leader>rv", function()
+            return refactoring.extract_var()
+        end, { desc = "Extract Variable", expr = true })
+
+        -- Normal-mode Extract Block
+        vim.keymap.set("n", "<leader>rb", function()
+            return refactoring.extract_block()
+        end, { desc = "Extract Block", expr = true })
+    end,
 }
