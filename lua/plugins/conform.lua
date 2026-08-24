@@ -7,6 +7,9 @@ return {
       timeout_ms = 2000,
       lsp_fallback = true,
     },
+    formatters_by_ext = {
+      hcl = { 'terraform_fmt' },
+    },
     formatters_by_ft = {
       json = { 'prettier' },
       lua = { 'stylua' },
@@ -19,7 +22,7 @@ return {
       },
       sh = { 'shfmt' },
       bash = { 'shfmt' },
-    },
+      terraform = { 'terraform_fmt' },
   },
   config = function(_, opts)
     local ok, conform = pcall(require, 'conform')

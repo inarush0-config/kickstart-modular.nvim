@@ -76,14 +76,6 @@ return {
             golangci_lint_ls = { capabilities = capabilities },
             terraformls = {
                 capabilities = capabilities,
-                on_attach = function()
-                    vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
-                        pattern = { '*.tf', '*.tfvars', '*.hcl' },
-                        callback = function()
-                            vim.lsp.buf.format()
-                        end,
-                    })
-                end,
             },
             svelte = { capabilities = capabilities },
             lua_ls = {
