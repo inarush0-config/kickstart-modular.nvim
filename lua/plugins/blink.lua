@@ -1,7 +1,10 @@
 return {
     'saghen/blink.cmp',
     lazy = false,
-    dependencies = 'rafamadriz/friendly-snippets',
+    dependencies = {
+        'rafamadriz/friendly-snippets',
+        'folke/lazydev.nvim',
+    },
     version = '*',
     opts = {
         keymap = { preset = 'default' },
@@ -10,7 +13,14 @@ return {
             nerd_font_variant = 'mono',
         },
         sources = {
-            default = { 'lsp', 'path', 'buffer' },
+            default = { 'lazydev', 'lsp', 'path', 'snippets', 'buffer' },
+            providers = {
+                lazydev = {
+                    name = 'LazyDev',
+                    module = 'lazydev.integrations.blink',
+                    score_offset = 100,
+                },
+            },
         },
     },
     config = function(_, opts)
