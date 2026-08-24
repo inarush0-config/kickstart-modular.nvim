@@ -112,7 +112,12 @@ vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
     command = [[%s/\s\+$//e]],
 })
 
--- Override xdg-open timeout
+-- Cross-platform file/URL opening
 vim.ui.open = function(path)
-    vim.fn.jobstart({ "xdg-open", path }, { detatch = true })
+    if vim.fn.has('mac') == 1 then
+        vim.fn.jobstart({ 'open', path }, { detach = true })
+    else
+        -- Linux/WSL: use xdg-open
+        vim.fn.jobstart({ 'xdg-open', path }, { detach = true })
+    end
 end
