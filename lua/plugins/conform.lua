@@ -23,6 +23,7 @@ return {
       sh = { 'shfmt' },
       bash = { 'shfmt' },
       terraform = { 'terraform_fmt' },
+    },
   },
   config = function(_, opts)
     local ok, conform = pcall(require, 'conform')
