@@ -115,7 +115,15 @@ vim.api.nvim_create_autocmd('FileType', {
 -- Clean up white space
 vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
     pattern = { '*' },
-    command = [[%s/\s\+$//e]],
+    callback = function(args)
+        if not vim.bo[args.buf].modifiable then
+            return
+        end
+        local view = vim.fn.winsaveview()
+        vim.cmd [[%s/\s\+$//e]]
+        vim.cmd [[%s/\n\+\%$//e]] -- Remove blank lines at end of file
+        vim.fn.winrestview(view)
+    end,
 })
 
 -- Cross-platform file/URL opening
