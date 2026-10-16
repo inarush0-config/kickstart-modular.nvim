@@ -38,6 +38,12 @@ vim.opt.mouse = 'a'      -- Enable mouse in all modes
 vim.opt.timeoutlen = 300 -- Timeout for mapped sequences
 vim.opt.ttimeoutlen = 30 -- Timeout for key codes
 
+-- Disable unused remote-plugin providers (does not affect LSP, formatters, or DAP)
+vim.g.loaded_node_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_python3_provider = 0
+vim.g.loaded_ruby_provider = 0
+
 -- Visual Helpers
 vim.opt.list = true   -- Show hidden characters
 vim.opt.listchars = { -- Define how hidden characters are displayed

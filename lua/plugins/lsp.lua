@@ -77,6 +77,8 @@ return {
             golangci_lint_ls = { capabilities = capabilities },
             terraformls = {
                 capabilities = capabilities,
+                -- Write terraform-ls's verbose stderr logging to its own file instead of lsp.log
+                cmd = { 'terraform-ls', 'serve', '-log-file=/tmp/terraform-ls-{{pid}}.log' },
             },
             svelte = { capabilities = capabilities },
             lua_ls = {
