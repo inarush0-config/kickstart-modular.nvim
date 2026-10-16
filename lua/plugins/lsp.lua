@@ -35,7 +35,8 @@ return {
         map('<leader>ds', telescope.lsp_document_symbols, 'Document symbols')
         map('<leader>ws', telescope.lsp_dynamic_workspace_symbols, 'Workspace symbols')
         map('<leader>ca', vim.lsp.buf.code_action, 'Code action')
-        map('K', vim.lsp.buf.hover, 'Hover Documentation')
+        -- Wrapped so noice's override (applied later on VeryLazy) is picked up
+        map('K', function() vim.lsp.buf.hover() end, 'Hover Documentation')
         map('gD', vim.lsp.buf.declaration, 'Go to declaration')
 
         -- Get capabilities

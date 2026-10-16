@@ -121,3 +121,6 @@ vim.ui.open = function(path)
         vim.fn.jobstart({ 'xdg-open', path }, { detach = true })
     end
 end
+
+-- Rounded border on diagnostic floats (matches noice hover border)
+vim.diagnostic.config { float = { border = 'rounded' } }
