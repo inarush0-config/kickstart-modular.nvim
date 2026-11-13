@@ -86,7 +86,6 @@ return {
           'rg',
           '--follow',
           '--hidden',
-          '--no-ignore',
           '--no-heading',
           '--with-filename',
           '--line-number',
@@ -117,8 +116,6 @@ return {
         find_files = {
           find_command = { 'fd', '--type', 'f', '--strip-cwd-prefix', '--exclude', '.venv' },
           hidden = true,
-          no_ignore = true,
-          no_ignore_parent = true,
         },
         buffers = {
           show_all_buffers = true,
